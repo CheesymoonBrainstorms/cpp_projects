@@ -1,10 +1,36 @@
+#include <cctype>
 #include <iostream>
 #include <string>
 
 #define CLEAR_SCR "\033[2J"
+#define flush() fflush(0)
 
+using std::cin;
 using std::cout;
+using std::getline;
 using std::string;
+
+string strToLower(string str) {
+  for (char &c : str) {
+    c = tolower(c);
+  }
+  return str;
+}
+
+bool booleanPrompt(string question) {
+  string answer;
+  while (true) {
+    cout << question << " [y/n]: ";
+    getline(cin, answer);
+    answer = strToLower(answer);
+
+    if (answer == "n") {
+      return false;
+    } else if (answer == "y") {
+      return true;
+    }
+  }
+}
 
 string startingMessage =
     "Welcome to my Command-Line Rock Paper Scissors game!\n\nBefore the game "
