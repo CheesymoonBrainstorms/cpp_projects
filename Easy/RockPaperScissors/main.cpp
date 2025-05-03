@@ -41,5 +41,9 @@ string startingMessage =
 
 int main(int argc, char *argv[]) {
   cout << CLEAR_SCR << startingMessage;
+  if (!booleanPrompt("Ready to begin?")) {
+    return 0;
+  }
+  cout << CLEAR_SCR;
   return 0;
 }
