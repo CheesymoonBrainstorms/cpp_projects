@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 
+#define CLEAR_SCR "\033[2J"
+
 std::string startingMessage =
     "Welcome to my Command-Line Rock Paper Scissors game!\n\nBefore the game "
     "starts, you need to know how the game works.\nWell, you only need to know "
@@ -9,6 +11,6 @@ std::string startingMessage =
     "\"P\",\n\t- For  Scissors press \"3\" or \"S\"\n\n\n";
 
 int main(int argc, char *argv[]) {
-  std::cout << startingMessage;
+  std::cout << CLEAR_SCR << startingMessage;
   return 0;
 }
