@@ -1,0 +1,4 @@
+# Ignoring binaries because they can get huge
+main
+*.bin
+*.o
