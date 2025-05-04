@@ -1,5 +1,4 @@
 #include <chrono>
-#include <cstdio>
 #include <cstdlib>
 #include <iostream>
 #include <string>
@@ -18,6 +17,11 @@ const string PAPER_STR = " Paper";
 const string SCISSORS_STR = " Scissors";
 enum Player { USER, BOT, DRAW };
 enum Choice { ROCK, PAPER, SCISSORS, MISTAKE };
+int userScore;
+int botScore;
+Choice usrChoice;
+Choice botChoice;
+Player roundWinner;
 
 void sleep(int milliseconds) {
   std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
@@ -28,10 +32,12 @@ int randomInt() {
   srand(static_cast<unsigned int>(seed));
   return rand();
 }
+string getWinner();
+string getStrChoice(Choice choice);
 string strToLower(string str);
 void identifyChoice(char c, Choice *usrChoice);
 bool booleanPrompt(string question);
-Player playRound();
+void playRound();
 
 string startingMessage =
     "Welcome to my Command-Line Rock Paper Scissors game!\n\nBefore the game "
@@ -39,10 +45,6 @@ string startingMessage =
     "the keys you need to press.\nSo this is all you need to know:\n"
     "\t- For  Rock press \"1\" or \"R\",\n\t- For  Paper press \"2\" or "
     "\"P\",\n\t- For  Scissors press \"3\" or \"S\"\n\n\n";
-int userScore;
-int botScore;
-Choice usrChoice;
-Choice botChoice;
 
 int main(int argc, char *argv[]) {
 
@@ -52,20 +54,9 @@ int main(int argc, char *argv[]) {
   //}
   cout << CLEAR_SCR;
 
-  // Debug stuff
-  switch (playRound()) {
-  case USER:
-    cout << "USER";
-    break;
-  case BOT:
-    cout << "BOT";
-    break;
-  case DRAW:
-    cout << "DRAW";
-    break;
-  }
-  cout << "\n Player choice: " << usrChoice << "\nBot choice: " << botChoice
-       << "\n";
+  playRound();
+  cout << "User chose " << getStrChoice(usrChoice) << " and Bot chose "
+       << getStrChoice(botChoice) << "\nSo, " << getWinner() << " wins!\n";
 
   return 0;
 }
@@ -112,7 +103,7 @@ bool booleanPrompt(string question) {
   }
 }
 
-Player playRound() {
+void playRound() {
   cout << "So, what's it gonna be? [1/2/3]: ";
   string userInp;
   getline(cin, userInp);
@@ -121,34 +112,60 @@ Player playRound() {
   botChoice = static_cast<Choice>(randomInt() % 3);
 
   if (usrChoice == botChoice) {
-    return DRAW;
+    roundWinner = DRAW;
   }
   if (usrChoice == MISTAKE) {
-    return BOT;
+    roundWinner = BOT;
   }
   if (botChoice == ROCK) {
     if (usrChoice == PAPER) {
-      return USER;
+      roundWinner = USER;
     }
     if (usrChoice == SCISSORS) {
-      return BOT;
+      roundWinner = BOT;
     }
   }
   if (botChoice == PAPER) {
     if (usrChoice == SCISSORS) {
-      return USER;
+      roundWinner = USER;
     }
     if (usrChoice == ROCK) {
-      return BOT;
+      roundWinner = BOT;
     }
   }
   if (botChoice == SCISSORS) {
     if (usrChoice == ROCK) {
-      return USER;
+      roundWinner = USER;
     }
     if (usrChoice == PAPER) {
-      return BOT;
+      roundWinner = BOT;
     }
   }
-  /// return DRAW; // In case that something goes wrong
+}
+
+string getWinner() {
+  switch (roundWinner) {
+  case USER:
+    return "USER";
+    break;
+  case BOT:
+    return "BOT";
+    break;
+  case DRAW:
+    return "DRAW";
+    break;
+  }
+}
+
+string getStrChoice(Choice choice) {
+  switch (choice) {
+  case ROCK:
+    return ROCK_STR;
+  case PAPER:
+    return PAPER_STR;
+  case SCISSORS:
+    return SCISSORS_STR;
+  case MISTAKE:
+    return "NOTHING";
+  }
 }
