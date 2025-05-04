@@ -41,13 +41,15 @@ string startingMessage =
     "\"P\",\n\t- For  Scissors press \"3\" or \"S\"\n\n\n";
 int userScore;
 int botScore;
+Choice usrChoice;
+Choice botChoice;
 
 int main(int argc, char *argv[]) {
 
   cout << CLEAR_SCR << startingMessage;
-  if (!booleanPrompt("Ready to begin?")) {
-    return 0;
-  }
+  // if (!booleanPrompt("Ready to begin?")) {
+  // return 0;
+  //}
   cout << CLEAR_SCR;
 
   // Debug stuff
@@ -62,8 +64,8 @@ int main(int argc, char *argv[]) {
     cout << "DRAW";
     break;
   }
-  srand(3);
-  cout << "\n" << rand();
+  cout << "\n Player choice: " << usrChoice << "\nBot choice: " << botChoice
+       << "\n";
 
   return 0;
 }
@@ -111,8 +113,6 @@ bool booleanPrompt(string question) {
 }
 
 Player playRound() {
-  Choice usrChoice;
-  Choice botChoice;
   cout << "So, what's it gonna be? [1/2/3]: ";
   string userInp;
   getline(cin, userInp);
