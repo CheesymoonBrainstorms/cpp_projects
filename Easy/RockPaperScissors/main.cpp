@@ -37,6 +37,28 @@ string getStrChoice(Choice choice);
 string strToLower(string str);
 void identifyChoice(char c, Choice *usrChoice);
 bool booleanPrompt(string question);
+void countdown() {
+  cout << CLEAR_SCR;
+  flush();
+  sleep(500);
+  cout << "\rGet Ready!";
+  flush();
+  sleep(500);
+  cout << "\r          ";
+  flush();
+  sleep(500);
+  cout << "\r3";
+  flush();
+  sleep(500);
+  cout << "\r2";
+  flush();
+  sleep(500);
+  cout << "\r1";
+  flush();
+  sleep(500);
+  cout << "\r";
+  flush();
+}
 void playRound();
 
 string startingMessage =
@@ -49,10 +71,12 @@ string startingMessage =
 int main(int argc, char *argv[]) {
 
   cout << CLEAR_SCR << startingMessage;
-  // if (!booleanPrompt("Ready to begin?")) {
-  // return 0;
-  //}
+  if (!booleanPrompt("Ready to begin?")) {
+    return 0;
+  }
   cout << CLEAR_SCR;
+
+  countdown();
 
   playRound();
   cout << "User chose " << getStrChoice(usrChoice) << " and Bot chose "
