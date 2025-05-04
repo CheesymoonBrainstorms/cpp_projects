@@ -1,6 +1,9 @@
-#include <cctype>
+#include <chrono>
+#include <cstdio>
+#include <cstdlib>
 #include <iostream>
 #include <string>
+#include <thread>
 
 #define CLEAR_SCR "\033[2J"
 #define flush() fflush(0)
@@ -13,9 +16,18 @@ using std::string;
 const string ROCK_STR = " Rock";
 const string PAPER_STR = " Paper";
 const string SCISSORS_STR = " Scissors";
-enum Player { USER, BOT };
+enum Player { USER, BOT, DRAW };
 enum Choice { ROCK, PAPER, SCISSORS, MISTAKE };
 
+void sleep(int milliseconds) {
+  std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
+}
+int randomInt() {
+  unsigned int seed =
+      std::chrono::high_resolution_clock::now().time_since_epoch().count();
+  srand(static_cast<unsigned int>(seed));
+  return rand();
+}
 string strToLower(string str);
 void identifyChoice(char c, Choice *usrChoice);
 bool booleanPrompt(string question);
@@ -31,13 +43,27 @@ int userScore;
 int botScore;
 
 int main(int argc, char *argv[]) {
+
   cout << CLEAR_SCR << startingMessage;
   if (!booleanPrompt("Ready to begin?")) {
     return 0;
   }
   cout << CLEAR_SCR;
 
-  // playRound();
+  // Debug stuff
+  switch (playRound()) {
+  case USER:
+    cout << "USER";
+    break;
+  case BOT:
+    cout << "BOT";
+    break;
+  case DRAW:
+    cout << "DRAW";
+    break;
+  }
+  srand(3);
+  cout << "\n" << rand();
 
   return 0;
 }
@@ -91,4 +117,38 @@ Player playRound() {
   string userInp;
   getline(cin, userInp);
   identifyChoice(userInp[0], &usrChoice);
+
+  botChoice = static_cast<Choice>(randomInt() % 3);
+
+  if (usrChoice == botChoice) {
+    return DRAW;
+  }
+  if (usrChoice == MISTAKE) {
+    return BOT;
+  }
+  if (botChoice == ROCK) {
+    if (usrChoice == PAPER) {
+      return USER;
+    }
+    if (usrChoice == SCISSORS) {
+      return BOT;
+    }
+  }
+  if (botChoice == PAPER) {
+    if (usrChoice == SCISSORS) {
+      return USER;
+    }
+    if (usrChoice == ROCK) {
+      return BOT;
+    }
+  }
+  if (botChoice == SCISSORS) {
+    if (usrChoice == ROCK) {
+      return USER;
+    }
+    if (usrChoice == PAPER) {
+      return BOT;
+    }
+  }
+  /// return DRAW; // In case that something goes wrong
 }
