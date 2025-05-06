@@ -7,8 +7,6 @@
 
 #define CLEAR_SCR "\033[2J"
 #define flush() fflush(0)
-#define WARN(m)                                                                \
-  cout << BYEL << "WARNING: " << RESET << m << "\n" // A lot of typing
 
 using std::cin;
 using std::cout;
@@ -34,6 +32,14 @@ int randomInt() {
       std::chrono::high_resolution_clock::now().time_since_epoch().count();
   srand(static_cast<unsigned int>(seed));
   return rand();
+}
+
+void WARN(string message) {
+  cout << BYEL << "\nWARNING: " << YEL << message << RESET << "\n";
+}
+void ERR(string message, int status = 1) {
+  cout << BRED << "\nERROR: " << RED << message << RESET << "\n";
+  exit(status);
 }
 string getWinner();
 string getStrChoice(Choice choice);
