@@ -171,13 +171,10 @@ string getWinner() {
   switch (roundWinner) {
   case USER:
     return "USER";
-    break;
   case BOT:
     return "BOT";
-    break;
   case DRAW:
     return "DRAW";
-    break;
   }
 }
 
