@@ -24,6 +24,17 @@ Choice usrChoice;
 Choice botChoice;
 Player roundWinner;
 
+namespace debug {
+void WARN(string message) {
+  cout << BYEL << "\nWARNING: " << YEL << message << RESET << "\n";
+}
+void ERR(string message, int status = 1) {
+  cout << BRED << "\nERROR: " << RED << message << RESET << "\n";
+  exit(status);
+}
+
+} // namespace debug
+
 void sleep(int milliseconds) {
   std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
 }
@@ -34,13 +45,6 @@ int randomInt() {
   return rand();
 }
 
-void WARN(string message) {
-  cout << BYEL << "\nWARNING: " << YEL << message << RESET << "\n";
-}
-void ERR(string message, int status = 1) {
-  cout << BRED << "\nERROR: " << RED << message << RESET << "\n";
-  exit(status);
-}
 string getWinner();
 string getStrChoice(Choice choice);
 string strToLower(string str);
