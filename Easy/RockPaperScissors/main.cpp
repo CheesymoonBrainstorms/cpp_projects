@@ -1,3 +1,4 @@
+#include "colored_text.h"
 #include <chrono>
 #include <cstdlib>
 #include <iostream>
@@ -6,6 +7,8 @@
 
 #define CLEAR_SCR "\033[2J"
 #define flush() fflush(0)
+#define WARN(m)                                                                \
+  cout << BYEL << "WARNING: " << RESET << m << "\n" // A lot of typing
 
 using std::cin;
 using std::cout;
