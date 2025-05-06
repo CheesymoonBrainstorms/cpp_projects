@@ -189,6 +189,8 @@ string getWinner() {
   case DRAW:
     return "DRAW";
   }
+  debug::ERR("Unexpected roundWinner value");
+  return ""; // To avoid compiler warning
 }
 
 string getStrChoice(Choice choice) {
@@ -202,4 +204,6 @@ string getStrChoice(Choice choice) {
   case MISTAKE:
     return "NOTHING";
   }
+  debug::ERR("Unexpected Choice value");
+  return ""; // To avoid compiler warning
 }
