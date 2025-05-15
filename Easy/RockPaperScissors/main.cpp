@@ -5,7 +5,7 @@
 #include <string>
 #include <thread>
 
-#define CLEAR_SCR "\033[2J"
+#define CLEAR_SCR "\033[H\033[J"
 #define flush() fflush(0)
 
 using std::cin;
