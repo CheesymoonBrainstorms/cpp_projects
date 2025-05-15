@@ -72,7 +72,7 @@ void countdown() {
   cout << "\r";
   flush();
 }
-void playRound();
+void playRound(int round);
 
 string startingMessage =
     "Welcome to my Command-Line Rock Paper Scissors game!\n\nBefore the game "
@@ -91,9 +91,7 @@ int main(int argc, char *argv[]) {
 
   countdown();
 
-  playRound();
-  cout << "User chose " << getStrChoice(usrChoice) << " and Bot chose "
-       << getStrChoice(botChoice) << "\nSo, " << getWinner() << " wins!\n";
+  playRound(1);
 
   return 0;
 }
@@ -140,7 +138,7 @@ bool booleanPrompt(string question) {
   }
 }
 
-void playRound() {
+void playRound(int round) {
   cout << "So, what's it gonna be? [1/2/3]: ";
   string userInp;
   getline(cin, userInp);
@@ -178,6 +176,8 @@ void playRound() {
       roundWinner = BOT;
     }
   }
+  cout << "User chose " << getStrChoice(usrChoice) << " and Bot chose "
+       << getStrChoice(botChoice) << "\nSo, " << getWinner() << " wins!\n";
 }
 
 string getWinner() {
