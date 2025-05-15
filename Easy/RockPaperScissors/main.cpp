@@ -108,15 +108,15 @@ string strToLower(string str) {
 void identifyChoice(char c, Choice *usrChoice) {
   switch (tolower(c)) {
   case '1':
-  case 'a':
+  case 'r':
     *usrChoice = ROCK;
     break;
   case '2':
-  case 'b':
+  case 'p':
     *usrChoice = PAPER;
     break;
   case '3':
-  case 'c':
+  case 's':
     *usrChoice = SCISSORS;
     break;
   default:
