@@ -44,7 +44,11 @@ int randomInt() {
   srand(static_cast<unsigned int>(seed));
   return rand();
 }
-
+void pause() {
+  cout << "Press Enter to continue... ";
+  string temp;
+  getline(cin, temp);
+}
 string getWinner();
 string getStrChoice(Choice choice);
 string strToLower(string str);
@@ -92,6 +96,8 @@ int main(int argc, char *argv[]) {
   countdown();
 
   playRound(1);
+  playRound(2);
+  playRound(3);
 
   return 0;
 }
@@ -139,6 +145,8 @@ bool booleanPrompt(string question) {
 }
 
 void playRound(int round) {
+  cout << CLEAR_SCR;
+  cout << "Round: " << round << "\n";
   cout << "So, what's it gonna be? [R/P/S]: ";
   string userInp;
   getline(cin, userInp);
@@ -176,8 +184,10 @@ void playRound(int round) {
       roundWinner = BOT;
     }
   }
+  cout << CLEAR_SCR;
   cout << "User chose " << getStrChoice(usrChoice) << " and Bot chose "
        << getStrChoice(botChoice) << "\nSo, " << getWinner() << " wins!\n";
+  pause();
 }
 
 string getWinner() {
