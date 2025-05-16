@@ -78,8 +78,8 @@ string startingMessage =
     "Welcome to my Command-Line Rock Paper Scissors game!\n\nBefore the game "
     "starts, you need to know how the game works.\nWell, you only need to know "
     "the keys you need to press.\nSo this is all you need to know:\n"
-    "\t- For  Rock press \"1\" or \"R\",\n\t- For  Paper press \"2\" or "
-    "\"P\",\n\t- For  Scissors press \"3\" or \"S\"\n\n\n";
+    "\t- For  Rock press \"R\" or \"1\",\n\t- For  Paper press \"P\" or "
+    "\"2\",\n\t- For  Scissors press \"S\" or \"3\"\n\n\n";
 
 int main(int argc, char *argv[]) {
 
@@ -139,7 +139,7 @@ bool booleanPrompt(string question) {
 }
 
 void playRound(int round) {
-  cout << "So, what's it gonna be? [1/2/3]: ";
+  cout << "So, what's it gonna be? [R/P/S]: ";
   string userInp;
   getline(cin, userInp);
   identifyChoice(userInp[0], &usrChoice);
